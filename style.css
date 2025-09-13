@@ -1,0 +1,569 @@
+:root {
+  --primary-color: #6c5ce7;
+  --secondary-color: #00cec9;
+  --accent-color: #fd79a8;
+  --background-color: #0f0e13;
+  --card-bg: rgba(16, 18, 27, 0.4);
+  --text-color: #ecf0f1;
+  --border-radius: 12px;
+  --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --border: 1px solid rgba(255, 255, 255, 0.18);
+  --income-color: #00b894;
+  --expense-color: #ff7675;
+  --gradient: linear-gradient(
+    135deg,
+    rgba(108, 92, 231, 0.8),
+    rgba(0, 206, 201, 0.8)
+  );
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background-color);
+  background-image: radial-gradient(
+      at 47% 33%,
+      rgba(108, 92, 231, 0.3) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 82% 65%, rgba(0, 206, 201, 0.3) 0, transparent 55%);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* App container */
+.app-container {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+}
+
+/* Sidebar styles */
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(13, 15, 23, 0.7);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h1 {
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 22px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar h1 i {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.balance-container {
+  margin-bottom: 30px;
+  padding: 15px;
+  background: rgba(16, 18, 27, 0.6);
+  border-radius: var(--border-radius);
+  border: var(--border);
+}
+
+.balance-container h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.balance {
+  font-size: 32px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.income-expense-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.income,
+.expense {
+  padding: 15px;
+  border-radius: var(--border-radius);
+  border: var(--border);
+  background: rgba(16, 18, 27, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.income:hover,
+.expense:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.income h3,
+.expense h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.money {
+  font-size: 22px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.money.plus {
+  color: var(--income-color);
+}
+
+.money.minus {
+  color: var(--expense-color);
+}
+
+/* Main content area */
+.main-content {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(15, 17, 26, 0.5);
+}
+
+.transaction-form,
+.history {
+  padding: 25px;
+  margin: 10px;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--border-radius);
+  border: var(--border);
+  /* box-shadow: var(--box-shadow); */
+  /* transition: box-shadow 0.3s ease; */
+}
+
+.transaction-form h3,
+.history h3 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: var(--secondary-color);
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: var(--border-radius);
+  border: var(--border);
+  background: rgba(16, 18, 27, 0.6);
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.3);
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--gradient);
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.filter-container label {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.filter-container select {
+  flex: 1;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+  max-height: calc(100% - 80px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) rgba(16, 18, 27, 0.6);
+}
+
+.list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: rgba(16, 18, 27, 0.6);
+  border-radius: 10px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+
+/* Fix transaction list item layout */
+.list li {
+  background: rgba(16, 18, 27, 0.6);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensure vertical alignment */
+  position: relative;
+  padding: 15px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Fix transaction amount positioning */
+.transaction-amount {
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 30px; /* Add space for delete button */
+}
+
+/* Fix delete button positioning */
+.delete-btn {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  line-height: 20px;
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.delete-btn:hover {
+  color: var(--expense-color);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.list li.income {
+  border-left: 5px solid var(--income-color);
+}
+
+.list li.expense {
+  border-left: 5px solid var(--expense-color);
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.transaction-description {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.transaction-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.category-tag {
+  background: rgba(108, 92, 231, 0.3);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.transaction-amount {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.delete-btn {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  line-height: 20px;
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: var(--expense-color);
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border-radius: var(--border-radius);
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  padding: 15px 25px;
+  transform: translateY(150%);
+  transition: transform 0.3s ease;
+  z-index: 100;
+}
+
+.notification.show {
+  transform: translateY(0);
+}
+
+/* Empty state message */
+.empty-message {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* Responsive design - Replace existing media queries with these enhanced ones */
+@media (max-width: 1200px) {
+  .app-container {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    position: relative;
+    height: auto;
+    padding: 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .main-content {
+    height: auto;
+    grid-template-rows: auto auto;
+    padding: 15px;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .income-expense-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .transaction-form,
+  .history {
+    margin: 10px 0;
+  }
+
+  body {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px;
+  }
+
+  .transaction-form,
+  .history {
+    padding: 20px;
+  }
+
+  .form-control {
+    margin-bottom: 15px;
+  }
+
+  input,
+  select {
+    padding: 10px 12px;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-container label {
+    margin-bottom: 5px;
+  }
+
+  .filter-container select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .income-expense-container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar h1 {
+    font-size: 20px;
+  }
+
+  .balance {
+    font-size: 24px;
+  }
+
+  .money {
+    font-size: 18px;
+  }
+
+  .transaction-meta {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .transaction-form,
+  .history {
+    padding: 15px;
+  }
+
+  .transaction-form h3,
+  .history h3 {
+    font-size: 18px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .list li {
+    padding: 12px;
+  }
+
+  .transaction-description {
+    font-size: 14px;
+  }
+
+  .transaction-amount {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sidebar {
+    padding: 15px 10px;
+  }
+
+  .balance-container {
+    padding: 10px;
+  }
+
+  .income,
+  .expense {
+    padding: 10px;
+  }
+
+  .transaction-form,
+  .history {
+    padding: 12px;
+  }
+
+  .form-control {
+    margin-bottom: 12px;
+  }
+
+  label {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  input,
+  select {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
